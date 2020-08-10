@@ -5,13 +5,19 @@
 </head>
 <body>
     <script>
-        const ws = new WebSocket('ws://localhost:8080/');
+        const ws = new WebSocket('ws://localhost:8080/')
 
+        ws.addEventListener('open', (e) => {
+            console.log('WebSocket open:')
+
+            // send data to server
+            ws.send('👋 from client side')
+        })
+
+        // receive message from server
         ws.addEventListener('message', (e) => {
             console.log(e.data)
         });
-
-        ws.send('message');
     </script>
 </body>
 </html>

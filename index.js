@@ -11,7 +11,7 @@ wss.on('connection', function connection(ws) {
         console.log(message)
     })
 
-    ws.send('some message')
+    ws.send('some message from server')
 })
 
 app.get('/', (req, res) => {

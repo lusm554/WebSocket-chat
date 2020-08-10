@@ -14,7 +14,7 @@
             ws.send('👋 from client side')
 
             // close connection 
-            // ws.close(1000, 'test close')
+            ws.close(1000, 'test close')
         })
 
         // receive message from server
@@ -23,7 +23,7 @@
         });
 
         ws.addEventListener('close', (e) => {
-            console.log('Connection closed')
+            console.log(`Connection closed: ${e.reason} \nwasClean: ${e.wasClean}`)
         });
     </script>
 </body>

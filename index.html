@@ -4,6 +4,14 @@
     <title>WebSocket</title>
 </head>
 <body>
-    <h1>Hello gay!</h1>
+    <script>
+        const ws = new WebSocket('ws://localhost:8080/');
+
+        ws.addEventListener('message', (e) => {
+            console.log(e.data)
+        });
+
+        ws.send('message');
+    </script>
 </body>
 </html>

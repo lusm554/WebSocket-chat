@@ -12,6 +12,18 @@ wss.on('connection', function connection(ws) {
     })
 
     ws.send('some message from server')
+
+    setTimeout(() => {
+        ws.send('hello')
+    }, 5000);
+})
+
+// close connection from server
+// setTimeout(() => wss.close() , 5000);
+
+
+wss.on('close', function close() {
+    console.log('connection closed')
 })
 
 app.get('/', (req, res) => {

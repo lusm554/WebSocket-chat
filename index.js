@@ -8,14 +8,11 @@ const wss = new WebSocket.Server({ server })
 
 wss.on('connection', function connection(ws) {
     ws.on('message', function incoming(message) {
-        console.log(message)
+        // console.log(message)
+        ws.send(message)
     })
 
-    ws.send('some message from server')
-
-    setTimeout(() => {
-        ws.send('hello')
-    }, 5000);
+    // ws.send('some message from server')
 })
 
 // close connection from server

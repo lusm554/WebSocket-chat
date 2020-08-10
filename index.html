@@ -4,6 +4,12 @@
     <title>WebSocket</title>
 </head>
 <body>
+    <form action="" id="form">
+        <input type="text" id="m">
+        <input type="submit" value="submit">
+    </form>
+    <ul id="list" style="list-style-type: none;"></ul>
+
     <script>
         const ws = new WebSocket('ws://localhost:8080/')
 
@@ -11,7 +17,7 @@
             console.log('connection open')
 
             // send data to server
-            ws.send('👋 from client side')
+            // ws.send('👋 from client side')
 
             // close connection 
             // ws.close(1000, 'test close')
@@ -19,7 +25,11 @@
 
         // receive message from server
         ws.addEventListener('message', (e) => {
-            console.log(e.data)
+            console.log('message:', e.data)
+
+            let li = document.createElement('li')   
+            li.innerText = e.data;
+            list.append(li)
         });
 
         ws.addEventListener('close', (e) => {
@@ -28,6 +38,13 @@
 
         ws.addEventListener('error', (e) => {
             console.log('WebSocket error:', e)
+        });
+
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault()
+            ws.send(m.value)
+            m.value = ''
         });
     </script>
 </body>

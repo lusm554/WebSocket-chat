@@ -11,8 +11,11 @@ app.use(express.static(path.join(__dirname, '/public')))
 
 wss.on('connection', function connection(ws, req) {
     ws.on('message', function incoming(message) {
-        // console.log(message)
-        ws.send(message)
+        let data = JSON.parse(message)
+
+        console.log(data)
+
+        ws.send(data.text)
     })
 
     console.log(req.socket.remoteAddress)

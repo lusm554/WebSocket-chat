@@ -20,7 +20,7 @@ wss.on('connection', function connection(ws, req) {
                 validateUser(ws, data);
                 break;
             case 'message':
-                sentMessages(message)
+                sendMessages(ws, message)
                 break;
         }
     })
@@ -39,9 +39,9 @@ function validateUser(ws, data) {
     ws.send(JSON.stringify(data))
 }
 
-function sentMessages(message) {
+function sendMessages(ws, message) {
     wss.clients.forEach(client => {
-        client.send(message)
+        client.send(message);
     })
 }
 

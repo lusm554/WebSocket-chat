@@ -10,7 +10,7 @@ let username;
     }
 })();
 
-// configure an object and send to the sever
+// configure an object and send to the server
 function sendMessage() {
     let msg = {
         type:'message',
@@ -26,6 +26,14 @@ function sendMessage() {
     m.value = ''
 }
 
+function addMessage(message) {
+    let parsMsg = JSON.parse(message)
+    console.log('message:', parsMsg.text)
+
+    let li = document.createElement('li')   
+    li.innerText = parsMsg.text;
+    list.append(li)
+}
 
 ws.addEventListener('open', (e) => {
     console.log('connection open')
@@ -33,11 +41,7 @@ ws.addEventListener('open', (e) => {
 
 // receive message from server
 ws.addEventListener('message', (e) => {
-    console.log('message:', e.data)
-
-    let li = document.createElement('li')   
-    li.innerText = e.data;
-    list.append(li)
+    addMessage(e.data)
 });
 
 ws.addEventListener('close', (e) => {

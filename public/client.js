@@ -1,6 +1,10 @@
 const ws = new WebSocket('ws://localhost:8080/')
 
-let username;
+let username, id = getRandomId();
+
+function getRandomId() {
+    return Math.floor(Math.random() * Math.floor(100));
+}
 
 function getUserName() {
     username = prompt('username?')
@@ -16,7 +20,7 @@ function sendMessage() {
     let msg = {
         type:'message',
         text: m.value,
-        id: 1,
+        id,
         username,
         date: Date.now()
     }
@@ -29,7 +33,7 @@ function sendMessage() {
 function loginUser() {
     let msg = {
         type: 'login',
-        id: 1,
+        id,
         username,
         date: Date.now()
     }

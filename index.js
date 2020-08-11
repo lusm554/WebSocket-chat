@@ -6,17 +6,14 @@ const path = require('path')
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 
-wss.on('connection', function connection(ws) {
+wss.on('connection', function connection(ws, req) {
     ws.on('message', function incoming(message) {
         // console.log(message)
         ws.send(message)
     })
 
-    // ws.send('some message from server')
+    console.log(req.socket.remoteAddress)
 })
-
-// close connection from server
-// setTimeout(() => wss.close() , 5000);
 
 
 wss.on('close', function close() {

@@ -6,16 +6,17 @@
 </head>
 <body>
     <style>
-        body {
-            font-family: 'Oxygen', sans-serif;
-        }
+        body { font-family: 'Oxygen', sans-serif; }
+        form { position: absolute; bottom: 0px; }
+        .input_text { width: 500px; height: 20px; margin-bottom: 10px;} 
+        .log { position: absolute; top: 0; right: 0;}
     </style>
-
-    <form action="" id="form" autocomplete="off">
-        <input type="text" id="m">
-        <input type="submit" value="submit">
-    </form>
     <ul id="list" style="list-style-type: none;"></ul>
+    <form action="" id="form" autocomplete="off">
+        <input type="text" id="m" class="input_text">
+        <input id="submit" type="submit" value="submit" class="input_submit" disabled="true">
+    </form>
+    <input type="button" value="Login" id="log" class="log">
     <script src="./client.js"></script>
 </body>
 </html>

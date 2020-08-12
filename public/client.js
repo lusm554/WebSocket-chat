@@ -1,9 +1,9 @@
 const ws = new WebSocket('ws://localhost:8080/')
 
-let username, id = getRandomId();
+let username, id;
 
-function getRandomId() {
-    return Math.floor(Math.random() * Math.floor(100));
+function setRandomId() {
+    id = Math.floor(Math.random() * Math.floor(100));
 }
 
 function getUserName() {
@@ -12,7 +12,7 @@ function getUserName() {
     while(username==null || username=='') {
         username = prompt('username?')
     }
-    loginUser()
+    setRandomId()
 }
 
 // configure an object and send to the server
@@ -31,6 +31,12 @@ function sendMessage() {
 }
 
 function loginUser() {
+    // enable submit button
+    submit.disabled = false;
+
+    // set username variable 
+    getUserName()
+
     let msg = {
         type: 'login',
         id,
@@ -40,6 +46,17 @@ function loginUser() {
 
     let jsonMsg = JSON.stringify(msg)
     ws.send(jsonMsg)
+}
+
+function logoutUser() {
+    username = ''
+    // disable submit button
+    submit.disabled = true;
+
+    // set new username 
+    // getUserName()
+
+    // send data to server
 }
 
 function addMessage(data) {
@@ -52,7 +69,7 @@ function addMessage(data) {
 
 ws.addEventListener('open', (e) => {
     console.log('connection open')
-    getUserName()
+    // getUserName()
 })
 
 // receive message from server
@@ -84,3 +101,14 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessage()
 });
+
+log.addEventListener('click', (e) => {
+    if(log.value === 'Login') {
+        loginUser()
+    }
+    else if (log.value === 'Logout') {
+        logoutUser()
+    }
+
+    log.value = log.value === 'Logout' ? 'Login' : 'Logout'
+})

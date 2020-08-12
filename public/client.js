@@ -65,6 +65,11 @@ function addMessage(data) {
     let li = document.createElement('li')   
     li.innerHTML = `<b>${data.username}</b>#${data.id} ${data.text}`;
     list.append(li)
+
+    // check for scroll chat
+    if (!shouldScroll()) {
+        scrollToBottom()
+    }
 }
 
 ws.addEventListener('open', (e) => {

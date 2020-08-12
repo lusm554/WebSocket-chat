@@ -10,8 +10,9 @@
         form { position: absolute; bottom: 0px; }
         .input_text { width: 500px; height: 20px; margin-bottom: 10px;} 
         .log { position: absolute; top: 0; right: 0;}
+        .messages { height: 770px; overflow-y: auto; }
     </style>
-    <div id="messages">
+    <div id="messages" class="messages">
         <ul id="list" style="list-style-type: none;"></ul>
     </div>
     <form action="" id="form" autocomplete="off">
@@ -20,5 +21,6 @@
     </form>
     <input type="button" value="Login" id="log" class="log">
     <script src="./client.js"></script>
+    <script src="./scrolling.js"></script>
 </body>
 </html>

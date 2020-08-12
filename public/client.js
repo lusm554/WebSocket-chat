@@ -65,8 +65,6 @@ function addMessage(data) {
     let li = document.createElement('li')   
     li.innerHTML = `<b>${data.username}</b>#${data.id} ${data.text}`;
     list.append(li)
-
-    console.log(messages.scrollTop, messages.clientHeight, messages.scrollHeight)
 }
 
 ws.addEventListener('open', (e) => {

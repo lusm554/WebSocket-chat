@@ -1,8 +1,10 @@
-const express = require('express')
-const app = express()
+const express = require('express'), app = express()
 const http = require('http')
 const WebSocket = require('ws')
 const path = require('path')
+const config = require('config')
+
+const PORT = config.get('port')
 
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
@@ -45,4 +47,4 @@ function sendMessages(ws, message) {
     })
 }
 
-server.listen(8080)
+server.listen(PORT)

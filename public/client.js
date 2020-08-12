@@ -6,13 +6,10 @@ function setRandomId() {
     id = Math.floor(Math.random() * Math.floor(100));
 }
 
-function getUserName() {
+function setUserName() {
     username = prompt('username?')
 
-    while(username==null || username=='') {
-        username = prompt('username?')
-    }
-    setRandomId()
+    return username === null || username === ''
 }
 
 // configure an object and send to the server
@@ -31,11 +28,15 @@ function sendMessage() {
 }
 
 function loginUser() {
+    // set username variable
+    const SET_USER_NAME = setUserName()
+    if(SET_USER_NAME) {
+        return SET_USER_NAME;
+    }
+    setRandomId()
+
     // enable submit button
     submit.disabled = false;
-
-    // set username variable 
-    getUserName()
 
     let msg = {
         type: 'login',
@@ -67,20 +68,19 @@ function addMessage(data) {
     list.append(li)
 
     // check for scroll chat
-    if (!shouldScroll()) {
+    if ( !shouldScroll() ) {
         scrollToBottom()
     }
 }
 
 ws.addEventListener('open', (e) => {
     console.log('connection open')
-    // getUserName()
 })
 
 // receive message from server
 ws.addEventListener('message', (e) => {
     let data = JSON.parse(e.data)
-    switch (data.type) {
+    switch ( data.type ) {
         case 'login':
             console.log('login:', data.status)
             // ws.send(e.data);
@@ -109,7 +109,7 @@ form.addEventListener('submit', (e) => {
 
 log.addEventListener('click', (e) => {
     if(log.value === 'Login') {
-        loginUser()
+        if( loginUser() ) return;
     }
     else if (log.value === 'Logout') {
         logoutUser()

@@ -3,6 +3,7 @@ const http = require('http')
 const WebSocket = require('ws')
 const path = require('path')
 const config = require('config')
+const { RSA_NO_PADDING } = require('constants')
 
 const PORT = config.get('port')
 
@@ -16,6 +17,10 @@ app.use('/auth', require('./routes/signin'))
 
 // sign up
 app.use('/auth', require('./routes/signup'))
+
+app.get('/', (req, res) => {
+    res.send('main_page_here')
+})
 
 wss.on('connection', function connection(ws, req) {
 

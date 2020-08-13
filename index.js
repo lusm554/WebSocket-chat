@@ -11,13 +11,11 @@ const wss = new WebSocket.Server({ server })
 
 app.use('/chat', express.static(path.join(__dirname, '/public')))
 
-app.get('/auth/signin', (req, res) => {
-    res.send('sign in here 🥱')
-})
+// sign in 
+app.use('/auth', require('./routes/signin'))
 
-app.get('/auth/signup', (req, res) => {
-    res.send('sign up here 🥱')
-})
+// sign up
+app.use('/auth', require('./routes/signup'))
 
 wss.on('connection', function connection(ws, req) {
 

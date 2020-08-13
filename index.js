@@ -9,7 +9,7 @@ const PORT = config.get('port')
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 
-app.use(express.static(path.join(__dirname, '/public')))
+app.use('/chat', express.static(path.join(__dirname, '/public')))
 
 wss.on('connection', function connection(ws, req) {
 

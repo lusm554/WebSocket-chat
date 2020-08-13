@@ -13,6 +13,7 @@ function setUserName() {
 }
 
 // configure an object and send to the server
+// @username 
 function sendMessage() {
     let msg = {
         type:'message',
@@ -27,6 +28,7 @@ function sendMessage() {
     m.value = ''
 }
 
+// @username 
 function loginUser() {
     // set username variable
     const SET_USER_NAME = setUserName()
@@ -50,7 +52,7 @@ function loginUser() {
 }
 
 function logoutUser() {
-    username = ''
+    // username = ''
     // disable submit button
     submit.disabled = true;
 

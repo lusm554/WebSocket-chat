@@ -11,6 +11,14 @@ const wss = new WebSocket.Server({ server })
 
 app.use('/chat', express.static(path.join(__dirname, '/public')))
 
+app.get('/auth/signin', (req, res) => {
+    res.send('sign in here 🥱')
+})
+
+app.get('/auth/signup', (req, res) => {
+    res.send('sign up here 🥱')
+})
+
 wss.on('connection', function connection(ws, req) {
 
     // receive data from client

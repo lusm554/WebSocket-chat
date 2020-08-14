@@ -10,7 +10,10 @@ const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 
 app.use('/chat', express.static(path.join(__dirname, '/public')))
-app.use(require('body-parser').json())
+
+const bodyParser = require('body-parser')
+app.use(bodyParser.urlencoded({ extended: false }))
+app.use(bodyParser.json())
 
 // sign in 
 app.use('/auth', require('./routes/signin'))

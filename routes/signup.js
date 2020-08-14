@@ -8,7 +8,10 @@ Router.get('/signup', (req, res) => {
 })
 
 Router.post('/signup', (req, res) => {
+    const { username, password} = req.body
+    console.log(username, password)
 
+    res.send('1')
 })
 
 module.exports = Router

@@ -6,6 +6,12 @@ const config = require('config')
 
 const PORT = config.get('port')
 
+// connect mongoDB
+const mongoose = require('mongoose')
+mongoose.connect(config.get('mongoID') , {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {
+    if(err) throw err;
+})
+
 const server = http.createServer(app)
 const wss = new WebSocket.Server({ server })
 

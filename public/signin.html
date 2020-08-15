@@ -5,6 +5,38 @@
     <title>Signin</title>
 </head>
 <body>
-    <h1>Signin here</h1>
+    <form action="">
+        <label for="username">Username</label>
+        <input type="text" name="username" id="username"><br><br>
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password"><br><br>
+        <input type="button" id="submit" value="Signin">
+    </form>
+
+    <script>
+        submit.addEventListener('click', (e) => {
+            const body = JSON.stringify({
+                username: username.value,
+                password: password.value
+            })
+            
+            fetch('http://localhost:8080/auth/signin', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body
+            })
+            .then(async (res) => {
+                if(res.status === 200) {
+                    let json = await res.json()
+                    console.log(json)
+                }
+                else {
+                    alert(`${res.status}, ${res.statusText}`)
+                }
+            })
+        });
+    </script>
 </body>
 </html>

@@ -42,4 +42,30 @@ Router.post('/signin', async (req, res) => {
     }
 })
 
+Router.post('/token', (req, res) => {
+    const { token } = req.body
+
+    if(!token) {
+        res.status(401).send('Unauthorized')
+    }
+
+    if(!refreshTokens.has(token)) {
+        res.status(403).send('Forbidden')
+    }
+
+    jwt.verify(token, refreshTokenSecret, (err, user) => {
+        if(err) {
+            throw res.status(403).send('Forbidden')
+        }
+         
+        // create new access token for 30 min 
+        const accessToken = jwt.sign({ 
+            username: user.username, 
+            password: user.password 
+        }, accessTokenSecret, { expiresIn: '30min'})
+
+        res.json({ accessToken })
+    })
+})
+
 module.exports = Router

@@ -109,13 +109,19 @@ form.addEventListener('submit', (e) => {
     sendMessage()
 });
 
-log.addEventListener('click', (e) => {
-    if(log.value === 'Login') {
-        if( loginUser() ) return;
+signin.addEventListener('click', (e) => {
+    if(signin.value === 'Signin') {
+        // if( loginUser() ) return;
+        window.location.href = 'http://localhost:8080/auth/signin'
     }
-    else if (log.value === 'Logout') {
-        logoutUser()
+    else if (signin.value === 'Signup') {
+        // logoutUser()
+        window.location.href = 'http://localhost:8080/auth/signin'
     }
 
-    log.value = log.value === 'Logout' ? 'Login' : 'Logout'
+    // signin.value = signin.value === 'Logout' ? 'Login' : 'Logout'
+})
+
+signup.addEventListener('click', (e) => {
+    window.location.href = 'http://localhost:8080/auth/signup'
 })

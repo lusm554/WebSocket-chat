@@ -20,7 +20,7 @@ async function validateUser(req, res, next) {
     const { username, password} = req.body
 
     if(!username || !password) {
-        return res.sendStatus(401)
+        return res.status(401).send('Unauthorized')
     }
 
     const isUserExist = ( await userModel.find({ username, password }) ).length !== 0

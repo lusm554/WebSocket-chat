@@ -8,15 +8,6 @@ Router.get('/signup', (req, res) => {
     res.sendFile(PATH_TO_SIGNUP)
 })
 
-Router.post('/signup', validateUser, (req, res) => {
-    /**
-     * If the user is verified,
-     * we send the ID to 
-     * the server 
-     */
-    res.json({id: req.doc._id})
-})
-
 //performs user verification 
 async function validateUser(req, res, next) {
     const { username, password} = req.body
@@ -36,11 +27,18 @@ async function validateUser(req, res, next) {
             res.status(500).send('Internal Server Error')
             throw err;
         }
-
-        req.doc = doc;
+        req.doc = doc
+        next()
     })
-
-    next()
 }
+
+Router.post('/signup', validateUser, (req, res) => {
+    /**
+     * If the user is verified,
+     * we send the ID to 
+     * the server 
+     */
+    res.json({id: req.doc._id})
+})
 
 module.exports = Router

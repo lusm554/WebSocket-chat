@@ -27,9 +27,17 @@
                 body,
             })
             .then((res) => {
-                console.log(res)
-
-                window.location.href = 'http://localhost:8080/chat'
+                /** 
+                 * If the user is registered 
+                 * we redirect him to the chat 
+                 * page.
+                */
+                if(res.status === 200) {
+                    window.location.href = 'http://localhost:8080/chat'
+                }
+                else {
+                    consle.log(res.status)
+                }
             })
         });
     </script>

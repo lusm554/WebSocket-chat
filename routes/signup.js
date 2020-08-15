@@ -1,18 +1,20 @@
 const Router = require('express').Router()
 const path = require('path')
-const mongoose = require('mongoose')
 const userModel = require('../models/user')
 
 Router.get('/signup', (req, res) => {
-    const PATH_SIGNUP = path.join(__dirname, '..', 'public', 'signup.html')
+    const PATH_TO_SIGNUP = path.join(__dirname, '..', 'public', 'signup.html')
 
-    res.sendFile(PATH_SIGNUP)
+    res.sendFile(PATH_TO_SIGNUP)
 })
 
 Router.post('/signup', validateUser, (req, res) => {
-    // if the user is verified
-    // we redirect on the chat page
-    res.json({doc: req.doc})
+    /**
+     * If the user is verified,
+     * we send the ID to 
+     * the server 
+     */
+    res.json({id: req.doc._id})
 })
 
 //performs user verification 

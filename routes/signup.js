@@ -12,7 +12,7 @@ Router.get('/signup', (req, res) => {
 Router.post('/signup', validateUser, (req, res) => {
     // if the user is verified
     // we redirect on the chat page
-    res.redirect('/chat')
+    res.json({doc: req.doc})
 })
 
 //performs user verification 
@@ -35,7 +35,7 @@ async function validateUser(req, res, next) {
             throw err;
         }
 
-        console.log(doc)
+        req.doc = doc;
     })
 
     next()

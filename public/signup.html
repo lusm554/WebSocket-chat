@@ -5,12 +5,33 @@
     <title>Signup</title>
 </head>
 <body>
-    <form action="http://localhost:8080/auth/signup" method="POST">
+    <form action="">
         <label for="username">Username</label><br>
-        <input type="text" name="username" required><br><br>
+        <input type="text" name="username" id="username" required><br><br>
         <label for="password">Password</label><br>
-        <input type="text" name="password" required><br><br>
-        <input type="submit" value="Signup" id="submit"/>
+        <input type="text" name="password" id="password" required><br><br>
+        <input type="button" value="Signup" id="submit"/>
     </form>
+
+    <script>
+        submit.addEventListener('click', (e) => {
+            let body = JSON.stringify(
+                {username: username.value, password: password.value}
+            )
+
+            fetch('http://localhost:8080/auth/signup', {
+                method: 'POST',
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body,
+            })
+            .then((res) => {
+                console.log(res)
+
+                window.location.href = 'http://localhost:8080/chat'
+            })
+        });
+    </script>
 </body>
 </html>

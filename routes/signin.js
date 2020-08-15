@@ -68,4 +68,15 @@ Router.post('/token', (req, res) => {
     })
 })
 
+Router.post('/logout', (req, res) => {
+    const { token } = req.body
+    const isTokenRemoved = refreshTokens.delete(token)
+
+    if(!isTokenRemoved) {
+        return res.status(403).send('Forbidden')
+    }
+
+    res.sendStatus(200)
+})
+
 module.exports = Router

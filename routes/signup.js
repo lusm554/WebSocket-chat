@@ -25,13 +25,13 @@ async function validateUser(req, res, next) {
 
     const isUserExist = ( await userModel.find({ username, password }) ).length !== 0
     if(isUserExist) {
-        return res.sendStatus(403)
+        return res.status(403).send('Forbidden')
     }
 
     // add user to DB
     new userModel({ username, password }).save((err, doc) => {
         if(err) {
-            res.sendStatus(500)
+            res.status(500).send('Internal Server Error')
             throw err;
         }
 

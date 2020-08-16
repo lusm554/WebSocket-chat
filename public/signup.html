@@ -33,8 +33,8 @@
                  * page.
                 */
                 if(res.status === 200) {
-                    /* process server response */
-                    window.location.href = 'http://localhost:8080/chat'
+                    /* process server response, get id from response {res} */
+                    window.location.href = 'http://localhost:8080/auth/signin'
                 }
                 else {
                     alert(`${res.status}, ${res.statusText}`)

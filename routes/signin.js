@@ -35,7 +35,7 @@ Router.post('/signin', async (req, res) => {
         }, refreshTokenSecret)
 
         refreshTokens.add(refreshToken)
-        res.json({ accessToken, refreshToken})
+        res.json({ accessToken, refreshToken })
     }
     else {
         res.status(401).send('UNAUTHORIZED')

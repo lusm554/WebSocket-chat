@@ -8,37 +8,37 @@ Router.get('/signup', (req, res) => {
     res.sendFile(PATH_TO_SIGNUP)
 })
 
-//performs user verification 
-async function validateUser(req, res, next) {
-    const { username, password} = req.body
+// //performs user verification 
+// async function validateUser(req, res, next) {
+//     const { username, password} = req.body
 
-    if(!username || !password) {
-        return res.status(401).send('Unauthorized')
-    }
+//     if(!username || !password) {
+//         return res.status(401).send('Unauthorized')
+//     }
 
-    const isUserExist = ( await userModel.find({ username, password }) ).length !== 0
-    if(isUserExist) {
-        return res.status(403).send('Forbidden')
-    }
+//     const isUserExist = ( await userModel.find({ username, password }) ).length !== 0
+//     if(isUserExist) {
+//         return res.status(403).send('Forbidden')
+//     }
 
-    // add user to DB
-    new userModel({ username, password }).save((err, doc) => {
-        if(err) {
-            res.status(500).send('Internal Server Error')
-            throw err;
-        }
-        req.doc = doc
-        next()
-    })
-}
+//     // add user to DB
+//     new userModel({ username, password }).save((err, doc) => {
+//         if(err) {
+//             res.status(500).send('Internal Server Error')
+//             throw err;
+//         }
+//         req.doc = doc
+//         next()
+//     })
+// }
 
-Router.post('/signup', validateUser, (req, res) => {
-    /**
-     * If the user is verified,
-     * we send the ID to 
-     * the server 
-     */
-    res.json({id: req.doc._id})
-})
+// Router.post('/signup', validateUser, (req, res) => {
+//     /**
+//      * If the user is verified,
+//      * we send the ID to 
+//      * the server 
+//      */
+//     res.json({id: req.doc._id})
+// })
 
 module.exports = Router

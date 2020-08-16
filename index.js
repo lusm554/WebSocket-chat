@@ -24,6 +24,10 @@ app.use(bodyParser.json())
 // sign in 
 app.use('/auth', require('./routes/signin'))
 
+/* Create storage for the refresh tokens */
+const refreshTokens = new Set();
+module.exports = refreshTokens
+
 // sign up
 app.use('/auth', require('./routes/signup'))
 
@@ -68,8 +72,3 @@ function sendMessages(ws, message) {
 }
 
 server.listen(PORT)
-
-/* Create storage for the refresh tokens */
-const refreshTokens = new Set()
-
-module.exports = refreshTokens

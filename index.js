@@ -68,3 +68,8 @@ function sendMessages(ws, message) {
 }
 
 server.listen(PORT)
+
+/* Create storage for the refresh tokens */
+const refreshTokens = new Set()
+
+module.exports = refreshTokens

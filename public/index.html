@@ -9,8 +9,7 @@
         body { font-family: 'Oxygen', sans-serif; }
         form { position: absolute; bottom: 0px; }
         .input_text { width: 500px; height: 20px; margin-bottom: 10px;}
-        .signin { position: absolute; top: 0; right: 0;}
-        .signup { position: absolute; top: 25px; right: 0;}
+        .auth_button { position: absolute; top: 0; right: 0;}
         .messages { height: 770px; overflow-y: auto; }
     </style>
     <div id="messages" class="messages">
@@ -20,8 +19,7 @@
         <input type="text" id="m" class="input_text">
         <input id="submit" type="submit" value="submit" class="input_submit" disabled="true">
     </form>
-    <input type="button" value="Signin" id="signin" class="signin">
-    <input type="button" value="Signup" id="signup" class="signup">
+    <input type="button" value="Logout" id="auth_button" class="auth_button">
     <script src="./client.js"></script>
     <script src="./scrolling.js"></script>
 </body>

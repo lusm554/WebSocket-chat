@@ -29,18 +29,18 @@
             .then( async (res) => {
                 /** 
                  * If the user is registered 
-                 * we redirect him to the chat 
+                 * we set user to localStorage and 
+                 * redirect him to the chat 
                  * page.
                 */
-                if(res.status === 200) {
-                    /* process server response, get id from response {res} */
-                    let json = await res.json()
-                    console.log(json)
-                    // window.location.href = 'http://localhost:8080/auth/signin'
+                if(res.status !== 200) {
+                    username.value = ''
+                    password.value = ''
+                    return alert(`${res.status}, ${res.statusText}`)
                 }
-                else {
-                    alert(`${res.status}, ${res.statusText}`)
-                }
+                const user = await res.json()
+                localStorage.setItem('user', user)
+                window.location.href = 'http://localhost:8080/chat'
             })
         });
     </script>

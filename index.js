@@ -31,6 +31,8 @@ module.exports = refreshTokens
 // sign up
 app.use('/auth', require('./routes/signup'))
 
+app.use('/auth', require('./routes/tokenHandler'))
+
 app.get('/', (req, res) => {
     res.send('main_page_here')
 })

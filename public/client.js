@@ -1,19 +1,6 @@
 const ws = new WebSocket('ws://localhost:8080/')
 
-let username, id;
-
-function setRandomId() {
-    id = Math.floor(Math.random() * Math.floor(100));
-}
-
-function setUserName() {
-    username = prompt('username?')
-
-    return username === null || username === ''
-}
-
 // configure an object and send to the server
-// @username 
 function sendMessage() {
     let msg = {
         type:'message',
@@ -28,38 +15,12 @@ function sendMessage() {
     m.value = ''
 }
 
-// @username 
 function loginUser() {
-    // set username variable
-    const SET_USER_NAME = setUserName()
-    if(SET_USER_NAME) {
-        return SET_USER_NAME;
-    }
-    setRandomId()
-
-    // enable submit button
-    submit.disabled = false;
-
-    let msg = {
-        type: 'login',
-        id,
-        username,
-        date: Date.now()
-    }
-
-    let jsonMsg = JSON.stringify(msg)
-    ws.send(jsonMsg)
+    // login user
 }
 
 function logoutUser() {
-    // username = ''
-    // disable submit button
-    submit.disabled = true;
-
-    // set new username 
-    // getUserName()
-
-    // send data to server
+    // logout user
 }
 
 function addMessage(data) {
@@ -110,16 +71,7 @@ form.addEventListener('submit', (e) => {
 });
 
 signin.addEventListener('click', (e) => {
-    if(signin.value === 'Signin') {
-        // if( loginUser() ) return;
-        window.location.href = 'http://localhost:8080/auth/signin'
-    }
-    else if (signin.value === 'Signup') {
-        // logoutUser()
-        window.location.href = 'http://localhost:8080/auth/signin'
-    }
-
-    // signin.value = signin.value === 'Logout' ? 'Login' : 'Logout'
+    window.location.href = 'http://localhost:8080/auth/signin'
 })
 
 signup.addEventListener('click', (e) => {

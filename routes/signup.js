@@ -40,7 +40,7 @@ Router.post('/signup', validateUser, (req, res) => {
      * we send the ID to 
      * the server 
      */
-    res.json({ id: req.doc._id })
+    res.json({ id: req.doc._id, ...req.user })
 })
 
 module.exports = Router

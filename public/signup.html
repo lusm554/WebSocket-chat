@@ -39,7 +39,7 @@
                     return alert(`${res.status}, ${res.statusText}`)
                 }
                 const user = await res.json()
-                localStorage.setItem('user', user)
+                localStorage.setItem('user', JSON.stringify(user))
                 window.location.href = 'http://localhost:8080/chat'
             })
         });

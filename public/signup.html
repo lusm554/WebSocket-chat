@@ -26,7 +26,7 @@
                 },
                 body,
             })
-            .then((res) => {
+            .then( async (res) => {
                 /** 
                  * If the user is registered 
                  * we redirect him to the chat 
@@ -34,7 +34,9 @@
                 */
                 if(res.status === 200) {
                     /* process server response, get id from response {res} */
-                    window.location.href = 'http://localhost:8080/auth/signin'
+                    let json = await res.json()
+                    console.log(json)
+                    // window.location.href = 'http://localhost:8080/auth/signin'
                 }
                 else {
                     alert(`${res.status}, ${res.statusText}`)

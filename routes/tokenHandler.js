@@ -20,7 +20,7 @@ Router.post('/token', (req, res) => {
 
     jwt.verify(token, refreshTokenSecret, (err, user) => {
         if(err) {
-            throw res.status(403).send('Forbidden')
+            return res.status(403)
         }
          
         // create new access token for 30 min 

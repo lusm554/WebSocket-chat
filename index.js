@@ -24,14 +24,8 @@ app.use(bodyParser.json())
 // sign in 
 app.use('/auth', require('./routes/signin'))
 
-/* Create storage for the refresh tokens */
-const refreshTokens = new Set();
-module.exports = refreshTokens
-
 // sign up
 app.use('/auth', require('./routes/signup'))
-
-app.use('/auth', require('./routes/tokenHandler'))
 
 app.get('/', (req, res) => {
     res.send('main_page_here')

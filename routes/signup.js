@@ -29,7 +29,6 @@ async function validateUser(req, res, next) {
         }
         /* pass the arguments to the next middlerware */
         req.doc = doc
-        req.user = { username, password }
         next()
     })
 }
@@ -40,7 +39,7 @@ Router.post('/signup', validateUser, (req, res) => {
      * we send the ID to 
      * the server 
      */
-    res.json({ id: req.doc._id, ...req.user })
+    res.json(req.doc)
 })
 
 module.exports = Router

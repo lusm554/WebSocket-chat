@@ -1,6 +1,8 @@
 const Router = require('express').Router()
 const path = require('path')
 const userModel = require('../models/user')
+const { customAlphabet } = require('nanoid')
+const nanoid = customAlphabet('1234567890', 4)
 
 Router.get('/signup', (req, res) => {
     const PATH_TO_SIGNUP = path.join(__dirname, '..', 'public', 'signup.html')
@@ -21,8 +23,9 @@ async function validateUser(req, res, next) {
         return res.status(403).send('Forbidden')
     }
 
+    const external_id = nanoid()
     // add user to DB
-    new userModel({ username, password }).save((err, doc) => {
+    new userModel({ username, password, external_id }).save((err, doc) => {
         if(err) {
             res.status(500).send('Internal Server Error')
             throw err;

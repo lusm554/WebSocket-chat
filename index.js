@@ -37,29 +37,13 @@ wss.on('connection', function connection(ws, req) {
     ws.on('message', function incoming(message) {
         let data = JSON.parse(message)
 
-        switch(data.type) {
-            case 'login': 
-                validateUser(ws, data);
-                break;
-            case 'message':
-                sendMessages(ws, message)
-                break;
-        }
+        sendMessages(ws, message)
     })
-
-    // console.log(req.socket.remoteAddress)
 })
-
 
 wss.on('close', function close() {
     console.log('connection closed')
 })
-
-function validateUser(ws, data) {
-    //make something important
-    data.status = 'success'
-    ws.send(JSON.stringify(data))
-}
 
 function sendMessages(ws, message) {
     wss.clients.forEach(client => {

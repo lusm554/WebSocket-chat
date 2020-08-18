@@ -14,7 +14,6 @@ window.addEventListener('load', () => {
 function sendMessage(user) {
     const id = user.external_id, username = user.username
     let msg = {
-        type:'message',
         text: m.value,
         id,
         username,

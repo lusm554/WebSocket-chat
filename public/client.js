@@ -1,7 +1,18 @@
 const ws = new WebSocket('ws://localhost:8080/')
 
+window.addEventListener('load', () => {
+    if(!localStorage.user) {
+        prompt('Do you already have an account?(yes/no)') === 'yes' ?
+            window.location.href = 'http://localhost:8080/auth/signin' :
+            window.location.href = 'http://localhost:8080/auth/signup'
+        return;
+    }
+    submit.disabled = false
+})
+
 // configure an object and send to the server
-function sendMessage() {
+function sendMessage(user) {
+    const id = user.external_id, username = user.username
     let msg = {
         type:'message',
         text: m.value,
@@ -15,13 +26,22 @@ function sendMessage() {
     m.value = ''
 }
 
-function loginUser() {
-    // login user
+function getUser() {  
+    const USER = JSON.parse(
+        localStorage.getItem('user')
+    )
+    return USER;
 }
 
 function logoutUser() {
-    // logout user
+    /**
+     * Clear all data from local storage
+     * and redirect user to signin page
+     */
+    localStorage.clear()
+    window.location.href = 'http://localhost:8080/auth/signin'
 }
+auth_button.addEventListener('click', logoutUser)
 
 function addMessage(data) {
     console.log('message:', data.text)
@@ -30,7 +50,10 @@ function addMessage(data) {
     li.innerHTML = `<b>${data.username}</b>#${data.id} ${data.text}`;
     list.append(li)
 
-    // check for scroll chat
+    /**
+     * Checking whether to scroll the page, 
+     * functions from ./scrolling.js
+     */
     if ( !shouldScroll() ) {
         scrollToBottom()
     }
@@ -43,17 +66,7 @@ ws.addEventListener('open', (e) => {
 // receive message from server
 ws.addEventListener('message', (e) => {
     let data = JSON.parse(e.data)
-    switch ( data.type ) {
-        case 'login':
-            console.log('login:', data.status)
-            // ws.send(e.data);
-            break;
-        case 'message': 
-            addMessage(data)
-            break;
-        default:
-            break;
-    }
+    addMessage(data)
 });
 
 ws.addEventListener('close', (e) => {
@@ -67,13 +80,5 @@ ws.addEventListener('error', (e) => {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    sendMessage()
+    sendMessage( getUser() )
 });
-
-signin.addEventListener('click', (e) => {
-    window.location.href = 'http://localhost:8080/auth/signin'
-})
-
-signup.addEventListener('click', (e) => {
-    window.location.href = 'http://localhost:8080/auth/signup'
-})

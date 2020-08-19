@@ -10,4 +10,8 @@ async function saveMessage(message) {
         console.log(error)
     }
 }
-module.exports = saveMessage
+
+async function getPreviousMsgs() {
+    return await MessageModel.find()
+}
+module.exports = { saveMessage, getPreviousMsgs }

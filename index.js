@@ -3,6 +3,7 @@ const http = require('http')
 const WebSocket = require('ws')
 const path = require('path')
 const config = require('config')
+const saveMessage = require('./controllers/messageController')
 
 const PORT = config.get('port')
 
@@ -31,13 +32,11 @@ app.get('/', (req, res) => {
     res.send('main_page_here')
 })
 
-wss.on('connection', function connection(ws, req) {
-
+wss.on('connection', async function connection(ws, req) {
     // receive data from client
-    ws.on('message', function incoming(message) {
-        let data = JSON.parse(message)
-
+    ws.on('message', async function incoming(message) {
         sendMessages(ws, message)
+        let response = await saveMessage(message)
     })
 })
 

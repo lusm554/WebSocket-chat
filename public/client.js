@@ -10,21 +10,6 @@ window.addEventListener('load', () => {
     submit.disabled = false
 })
 
-// configure an object and send to the server
-function sendMessage(user) {
-    const id = user.external_id, username = user.username
-    let msg = {
-        text: m.value,
-        id,
-        username,
-        date: Date.now()
-    }
-    let jsonMsg = JSON.stringify(msg)
-    ws.send(jsonMsg)
-
-    m.value = ''
-}
-
 function getUser() {  
     const USER = JSON.parse(
         localStorage.getItem('user')
@@ -42,7 +27,28 @@ function logoutUser() {
 }
 auth_button.addEventListener('click', logoutUser)
 
-function addMessage(data) {
+// set the message object 
+function setMessageObj(user) {
+    const id = user.external_id, username = user.username
+    let msg = {
+        text: m.value,
+        id,
+        username,
+        date: Date.now()
+    }
+    return msg
+}
+
+// send message obj to the server
+function sendMessageToServer() {
+    let msg = setMessageObj( getUser() )
+    let jsonMsg = JSON.stringify(msg)
+    ws.send(jsonMsg)
+
+    m.value = ''
+}
+
+function addMessageToChat(data) {
     console.log('message:', data.text)
 
     let li = document.createElement('li')   
@@ -65,7 +71,16 @@ ws.addEventListener('open', (e) => {
 // receive message from server
 ws.addEventListener('message', (e) => {
     let data = JSON.parse(e.data)
-    addMessage(data)
+    if(data.type === 'message') {
+        addMessageToChat(data) 
+    }
+    else {
+        // add previous messages to the chat
+        for(rawMessage of data.previousMsgs) {
+            let message = JSON.parse(rawMessage)
+            addMessageToChat(message)
+        }
+    }
 });
 
 ws.addEventListener('close', (e) => {
@@ -76,8 +91,7 @@ ws.addEventListener('error', (e) => {
     console.log('WebSocket error:', e)
 });
 
-
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    sendMessage( getUser() )
+    sendMessageToServer( setMessageObj( getUser() ) )
 });

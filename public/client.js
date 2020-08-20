@@ -39,6 +39,12 @@ function setMessageObj(user) {
     return msg
 }
 
+function setUserDataOnServer() {
+    let { _id: id, username } = JSON.parse( localStorage.user )
+    let data = JSON.stringify({ type: 'setUserData', id, username })
+    ws.send(data)
+}
+
 // send message obj to the server
 function sendMessageToServer(msg) {
     let jsonMsg = JSON.stringify(msg)
@@ -63,6 +69,8 @@ function addMessageToChat(data) {
 
 ws.addEventListener('open', (e) => {
     console.log('connection open')
+    // send user data to the server
+    setUserDataOnServer()
 })
 
 // receive message from server

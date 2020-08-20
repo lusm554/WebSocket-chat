@@ -40,8 +40,7 @@ function setMessageObj(user) {
 }
 
 // send message obj to the server
-function sendMessageToServer() {
-    let msg = setMessageObj( getUser() )
+function sendMessageToServer(msg) {
     let jsonMsg = JSON.stringify(msg)
     ws.send(jsonMsg)
 
@@ -49,8 +48,6 @@ function sendMessageToServer() {
 }
 
 function addMessageToChat(data) {
-    console.log('message:', data.text)
-
     let li = document.createElement('li')   
     li.innerHTML = `<b>${data.username}</b>#${data.id} ${data.text}`;
     list.append(li)

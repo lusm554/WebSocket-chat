@@ -30,14 +30,19 @@ app.get('/', (req, res) => {
 })
 
 wss.on('connection', async function connection(ws, req) {
-    /* send previous messages */
-    let rawPreviousMsgs = await getPreviousMsgs()
-    let previousMsgs = rawPreviousMsgs.map(messageObj => messageObj.message) 
-    ws.send( JSON.stringify({ type: 'previousMsgs', previousMsgs }) )
-
     // receive data from client
     ws.on('message', async function incoming(message) {
         let rawMessage = JSON.parse(message)
+
+        if(rawMessage.type === 'setUserData') {
+            /**
+             * After downloading the client, the client sends the user's data to the server,
+             * the server sets the data and sends the previous messages to the client
+             */
+            ws.user = rawMessage
+            return await sendPreviousMessages(ws)
+        }
+        
         message = JSON.stringify( { type: 'message', ...rawMessage } )
 
         sendMessages(ws, message)
@@ -50,7 +55,6 @@ wss.on('close', function close() {
 })
 
 /**
- * 
  * @param {object} ws 
  * @param {string} message - JSON object from received message
  */
@@ -58,6 +62,12 @@ function sendMessages(ws, message) {
     wss.clients.forEach(client => {
         client.send(message);
     })
+}
+
+async function sendPreviousMessages(ws) {
+    let rawPreviousMsgs = await getPreviousMsgs()
+    let previousMsgs = rawPreviousMsgs.map(messageObj => messageObj.message) 
+    ws.send( JSON.stringify({ type: 'previousMsgs', previousMsgs }) )
 }
 
 server.listen(PORT)

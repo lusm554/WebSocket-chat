@@ -23,12 +23,10 @@ app.use(bodyParser.json())
 
 // sign in 
 app.use('/auth', require('./routes/signin'))
-
 // sign up
 app.use('/auth', require('./routes/signup'))
-
 app.get('/', (req, res) => {
-    res.send('main_page_here')
+    res.redirect(`http://localhost:${PORT}/chat`)
 })
 
 wss.on('connection', async function connection(ws, req) {

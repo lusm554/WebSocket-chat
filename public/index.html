@@ -8,8 +8,9 @@
     <style>
         body { font-family: 'Oxygen', sans-serif; }
         form { position: absolute; bottom: 0px; }
-        .input_text { width: 500px; height: 20px; margin-bottom: 10px;}
-        .auth_button { position: absolute; top: 0; right: 0;}
+        .input_text { width: 500px; height: 20px; margin-bottom: 10px; }
+        .auth_button { position: absolute; top: 0; right: 0; }
+        .create_room { position: absolute; top: 22px; right: 0; }
         .messages { height: 770px; overflow-y: auto; }
     </style>
     <div id="messages" class="messages">
@@ -20,7 +21,9 @@
         <input id="submit" type="submit" value="submit" class="input_submit" disabled="true">
     </form>
     <input type="button" value="Logout" id="auth_button" class="auth_button">
+    <input type="button" value="Create room" id="create_room" class="create_room">
     <script src="./client.js"></script>
     <script src="./scrolling.js"></script>
+    <script src="./createRoom.js"></script>
 </body>
 </html>

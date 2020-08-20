@@ -28,6 +28,7 @@ app.use('/auth', require('./routes/signup'))
 app.get('/', (req, res) => {
     res.redirect(`http://localhost:${PORT}/chat`)
 })
+app.use('/room', require('./routes/chatRoom'))
 
 wss.on('connection', async function connection(ws, req) {
     // receive data from client

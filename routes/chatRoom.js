@@ -22,6 +22,12 @@ Router.get('/:id', (req, res) => {
     }
 })
 
+Router.post('/join', (req, res) => {
+    let { id: user_id } = req.body
+
+    res.json({ user_id })
+})
+
 Router.delete('/delete', (req, res) => {
     let room_id = req.body.room_id
 

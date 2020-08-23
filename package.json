@@ -1,5 +1,5 @@
 {
-  "name": "websocket",
+  "name": "websocket-chat",
   "version": "1.0.0",
   "description": "Learn how works webScket",
   "main": "index.js",
@@ -10,7 +10,8 @@
   },
   "keywords": [
     "nodejs",
-    "websocket"
+    "websocket",
+    "chat"
   ],
   "author": "loveyousomuch554@gmail.com",
   "license": "ISC",

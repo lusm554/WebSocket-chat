@@ -6,6 +6,19 @@ const config = require('config')
 const { saveMessage, getPreviousMsgs } = require('./controllers/messageController')
 const PORT = config.get('port')
 
+/* TEST */
+/**
+ * Wrapper that will emit files processed by webpack to a server.
+ */
+const webpack = require('webpack')
+const webpackDevMiddleware = require('webpack-dev-middleware')
+const webpackConfig = require('./webpack.dev')
+const compiler = webpack(webpackConfig)
+
+app.use(webpackDevMiddleware(compiler, {
+    publicPath: webpackConfig.output.publicPath
+}))
+
 // connect mongoDB
 const mongoose = require('mongoose')
 mongoose.connect(config.get('mongoID') , {useNewUrlParser: true, useUnifiedTopology: true}, (err) => {

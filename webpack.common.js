@@ -13,7 +13,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: 'Production'
+            title: ''
         }),
     ],
     output: {

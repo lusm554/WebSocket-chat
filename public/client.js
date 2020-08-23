@@ -64,9 +64,16 @@ function addMessageToChat(data) {
      * Checking whether to scroll the page, 
      * functions from ./scrolling.js
      */
-    if ( !shouldScroll() ) {
-        scrollToBottom()
-    }
+    // if ( !shouldScroll() ) {
+    //     scrollToBottom()
+    // }
+    import('./scrolling').then(module => {
+        const {shouldScroll, scrollToBottom} = module
+
+        if( !shouldScroll() ) {
+            scrollToBottom()
+        }
+    })
 }
 
 ws.addEventListener('open', (e) => {

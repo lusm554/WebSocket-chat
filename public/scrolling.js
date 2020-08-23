@@ -7,3 +7,5 @@ function shouldScroll() {
 function scrollToBottom() {
     messages.scrollTop = messages.scrollHeight
 }
+
+export { shouldScroll, scrollToBottom }

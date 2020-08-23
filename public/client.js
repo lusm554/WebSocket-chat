@@ -109,3 +109,11 @@ form.addEventListener('submit', (e) => {
     e.preventDefault()
     sendMessageToServer( setMessageObj( getUser() ) )
 });
+
+create_room.addEventListener('click', () => {
+    import('./createRoom').then(module => {
+        const createRoomHandler = module.default
+
+        createRoomHandler()
+    })
+})

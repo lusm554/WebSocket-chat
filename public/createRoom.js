@@ -1,4 +1,4 @@
-create_room.addEventListener('click', () => {
+export default function createRoomHandler() {
     let roomName = prompt('room name?')
     if(roomName === null || roomName === '') return alert('Incorrect input');
     let { _id: user_id } = JSON.parse( localStorage.user )
@@ -13,5 +13,5 @@ create_room.addEventListener('click', () => {
     .then( async (res) => {
         let roomObj = await res.json()
         console.log(roomObj)
-    })  
-})
+    })
+}

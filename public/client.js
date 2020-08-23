@@ -1,5 +1,7 @@
 const ws = new WebSocket('ws://localhost:8080/')
 
+console.log(`Looks like we are in ${process.env.NODE_ENV} mode!`)
+ 
 window.addEventListener('load', () => {
     if(!localStorage.user) {
         prompt('Do you already have an account?(yes/no)') === 'yes' ?

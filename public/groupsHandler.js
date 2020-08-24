@@ -16,7 +16,7 @@ function createRoomHandler() {
         }
 
         let roomObj = await res.json()
-        console.log(roomObj)
+        window.location.href = `http://localhost:8080/chat/room/${roomObj.room_id}`
     })
 }
 

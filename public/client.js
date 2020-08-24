@@ -64,9 +64,6 @@ function addMessageToChat(data) {
      * Checking whether to scroll the page, 
      * functions from ./scrolling.js
      */
-    // if ( !shouldScroll() ) {
-    //     scrollToBottom()
-    // }
     import('./scrolling').then(module => {
         const {shouldScroll, scrollToBottom} = module
 
@@ -113,7 +110,6 @@ form.addEventListener('submit', (e) => {
 create_room.addEventListener('click', () => {
     import('./createRoom').then(module => {
         const createRoomHandler = module.default
-
         createRoomHandler()
     })
 })

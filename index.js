@@ -10,14 +10,17 @@ const PORT = config.get('port')
 /**
  * Wrapper that will emit files processed by webpack to a server.
  */
-const webpack = require('webpack')
-const webpackDevMiddleware = require('webpack-dev-middleware')
-const webpackConfig = require('./webpack.dev')
-const compiler = webpack(webpackConfig)
+process.env.NODE_ENV = 'development'
+if(process.env.NODE_ENV !== 'production') {
+    const webpack = require('webpack')
+    const webpackDevMiddleware = require('webpack-dev-middleware')
+    const webpackConfig = require('./webpack.dev')
+    const compiler = webpack(webpackConfig)
 
-app.use(webpackDevMiddleware(compiler, {
-    publicPath: webpackConfig.output.publicPath
-}))
+    app.use(webpackDevMiddleware(compiler, {
+        publicPath: webpackConfig.output.publicPath
+    }))
+}
 
 // connect mongoDB
 const mongoose = require('mongoose')

@@ -23,9 +23,15 @@ Router.get('/:id', (req, res) => {
 })
 
 Router.post('/join', (req, res) => {
-    let { id: user_id } = req.body
+    let { id: user_id, room_id } = req.body
+    let room = rooms.get(room_id)
 
-    res.json({ user_id })
+    if(room === undefined) {
+        return res.status(401).send('Unauthorized')
+    }
+    room.users.push(user_id)
+
+    res.json({ room })
 })
 
 Router.delete('/delete', (req, res) => {

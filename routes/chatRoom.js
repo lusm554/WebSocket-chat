@@ -10,8 +10,8 @@ Router.post('/create', (req, res) => {
     res.json(roomObj)
 })
 
-Router.get('/:id', (req, res) => {
-    let room_id = req.params.id
+Router.get('/', (req, res) => {
+    let room_id = req.query.id
 
     if(rooms.has(room_id)) {
         res.json(rooms.get(room_id))
@@ -33,7 +33,7 @@ Router.post('/join', (req, res) => {
     }
     room.users.push(user_id)
 
-    res.json({ room })
+    res.json(room)
 })
 
 function alreadyHaveUser(user_id, room_id) {

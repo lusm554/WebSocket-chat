@@ -16,7 +16,7 @@ function createRoomHandler() {
         }
 
         let roomObj = await res.json()
-        window.location.href = `http://localhost:8080/chat/room/${roomObj.room_id}`
+        window.location.replace(`http://localhost:8080/chat/room?id=${roomObj.room_id}`)
     })
 }
 
@@ -40,7 +40,7 @@ function joinToGroup() {
         }
 
         let roomObj = await res.json()
-        console.log(roomObj)
+        window.location.replace(`http://localhost:8080/chat/room?id=${roomObj.room_id}`)
     })
 }
 

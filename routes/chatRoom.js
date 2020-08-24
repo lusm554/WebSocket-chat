@@ -1,5 +1,4 @@
 const Router = require('express').Router()
-const path = require('path')
 const { nanoid } = require('nanoid')
 // room storage 
 let rooms = new Map()

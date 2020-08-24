@@ -108,8 +108,15 @@ form.addEventListener('submit', (e) => {
 });
 
 create_group.addEventListener('click', () => {
-    import('./createRoom').then(module => {
-        const createRoomHandler = module.default
+    import('./groupsHandler').then(module => {
+        const { createRoomHandler } = module
         createRoomHandler()
+    })
+})
+
+join_group.addEventListener('click', () => {
+    import('./groupsHandler').then(module => {
+        const { joinToGroup } = module
+        joinToGroup()
     })
 })

@@ -107,7 +107,7 @@ form.addEventListener('submit', (e) => {
     sendMessageToServer( setMessageObj( getUser() ) )
 });
 
-create_room.addEventListener('click', () => {
+create_group.addEventListener('click', () => {
     import('./createRoom').then(module => {
         const createRoomHandler = module.default
         createRoomHandler()

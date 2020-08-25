@@ -13,8 +13,22 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new HtmlWebpackPlugin({
-            title: '',
-            template: './public/index.html'
+            inject: true,
+            chunks: ['client'],
+            template: './public/index.html',
+            filename: 'index.html'
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: [],
+            template: './public/signin.html',
+            filename: 'signin.html'
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: [],
+            template: './public/signup.html',
+            filename: 'signup.html'
         }),
     ],
     output: {

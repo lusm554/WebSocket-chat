@@ -15,7 +15,9 @@ Router.get('/', (req, res) => {
     let room_id = req.query.id
 
     if(rooms.has(room_id)) {
-        res.sendFile(path.join(__dirname, '..', 'public', 'chatGroup.html'))
+        process.env.NODE_ENV === 'production' ? 
+            res.sendFile(path.join(__dirname, '..', 'build', 'chatGroup.html')) :
+            res.sendFile(path.join(__dirname, '..', 'public', 'chatGroup.html'))
     }
     else {
         res.status(401).send('Unauthorized')

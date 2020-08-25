@@ -24,6 +24,17 @@ Router.get('/', (req, res) => {
     }
 })
 
+Router.post('/', (req, res) => {
+    let { room_id } = req.body
+
+    if(rooms.has(room_id)) {
+        res.json( rooms.get(room_id) )
+    }
+    else {
+        res.status(401).send('Unauthorized')
+    }
+})
+
 Router.post('/join', (req, res) => {
     let { user_id, room_id } = req.body
     let room = rooms.get(room_id)

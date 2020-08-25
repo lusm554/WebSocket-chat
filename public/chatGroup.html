@@ -3,8 +3,25 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat</title>
-    <script src="./roomMessages.bundle.js"></script> <!--only for development mode-->
 </head>
 <body>
+    <style>
+        body { font-family: 'Oxygen', sans-serif; }
+        form { position: absolute; bottom: 0px; }
+        .input_text { width: 500px; height: 20px; margin-bottom: 10px; }
+        .main_page { position: absolute; top: 0; right: 0; }
+        .join_group { position: absolute; top: 22px; right: 0; }
+        .messages { height: 770px; overflow-y: auto; }
+    </style>
+    <div id="messages" class="messages">
+        <ul id="list" style="list-style-type: none;"></ul>
+    </div>
+    <form action="" id="form" autocomplete="off">
+        <input type="text" id="m" class="input_text" maxlength="100">
+        <input id="submit" type="submit" value="submit" class="input_submit" disabled="true">
+    </form>
+    <input type="button" value="Main page" id="main_page" class="main_page">
+    <input type="button" value="Join the group" id="join_group" class="join_group">
+    <script src="./roomMessages.bundle.js"></script> <!--only for development mode-->
 </body>
 </html>

@@ -42,6 +42,7 @@ function setMessageObj(user) {
 }
 
 function setUserDataOnServer() {
+    if(!localStorage.user) return;
     let { _id: id, username } = JSON.parse( localStorage.user )
     let data = JSON.stringify({ type: 'setUserData', id, username })
     ws.send(data)

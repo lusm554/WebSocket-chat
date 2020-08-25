@@ -9,9 +9,5 @@ module.exports = merge(common, {
     devtool: 'inline-source-map',
     output: {
         publicPath: '/chat'
-    },
-    devServer: {
-        contentBase: './build',
-        port: 6969
     }
 })

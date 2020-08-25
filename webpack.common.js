@@ -9,6 +9,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 module.exports = {
     entry: {
         client: './public/client.js',
+        roomMessages: './public/roomMessages.js'
     },
     plugins: [
         new CleanWebpackPlugin(),
@@ -17,6 +18,12 @@ module.exports = {
             chunks: ['client'],
             template: './public/index.html',
             filename: 'index.html'
+        }),
+        new HtmlWebpackPlugin({
+            inject: true,
+            chunks: ['roomMessages'],
+            template: './public/chatGroup.html',
+            filename: 'chatGroup.html'
         }),
         new HtmlWebpackPlugin({
             inject: true,

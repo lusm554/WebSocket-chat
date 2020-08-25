@@ -3,6 +3,10 @@ const path = require('path')
 const userModel = require('../models/user')
 
 Router.get('/signin', (req, res) => {
+    if(process.env.NODE_ENV == 'production') {
+        return res.sendFile(path.join(__dirname, '..', 'build', 'signin.html'))
+    }
+
     res.sendFile(path.join(__dirname, '..', 'public', 'signin.html'))
 })
 

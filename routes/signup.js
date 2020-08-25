@@ -5,9 +5,11 @@ const { customAlphabet } = require('nanoid')
 const nanoid = customAlphabet('1234567890', 4)
 
 Router.get('/signup', (req, res) => {
-    const PATH_TO_SIGNUP = path.join(__dirname, '..', 'public', 'signup.html')
+    if(process.env.NODE_ENV == 'production') {
+        return res.sendFile(path.join(__dirname, '..', 'build', 'signup.html'))
+    }
 
-    res.sendFile(PATH_TO_SIGNUP)
+    res.sendFile(path.join(__dirname, '..', 'public', 'signup.html'))
 })
 
 //performs user verification 

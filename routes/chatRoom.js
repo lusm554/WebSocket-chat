@@ -1,5 +1,6 @@
 const Router = require('express').Router()
 const { nanoid } = require('nanoid')
+const path = require('path')
 // room storage 
 let rooms = new Map()
 
@@ -14,7 +15,7 @@ Router.get('/', (req, res) => {
     let room_id = req.query.id
 
     if(rooms.has(room_id)) {
-        res.json(rooms.get(room_id))
+        res.sendFile(path.join(__dirname, '..', 'public', 'chatGroup.html'))
     }
     else {
         res.status(401).send('Unauthorized')

@@ -2,8 +2,6 @@ const Router = require('express').Router()
 const { nanoid } = require('nanoid')
 const path = require('path')
 const roomModel = require('../models/room')
-// room storage 
-let rooms = new Map()
 
 Router.post('/create', (req, res) => {
     const room_id = nanoid(), roomObj = { room_id, ...req.body } 

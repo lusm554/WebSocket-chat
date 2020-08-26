@@ -25,11 +25,16 @@ function getUrlParams(search) {
 ws.addEventListener('open', (e) => {
     console.log('connection open')
     submit.disabled = false
+    import('./sendMessages').then( ({setUserDataOnServer}) => {
+        setUserDataOnServer(ws, 'setRoomUserData')
+    })
 })
 
 ws.addEventListener('message', (e) => {
     let message = e.data
-    console.log(message)
+    console.log(
+        JSON.parse(message)
+    )
 })
 
 form.addEventListener('submit', (e) => {

@@ -30,16 +30,29 @@ ws.addEventListener('open', (e) => {
     })
 })
 
-ws.addEventListener('message', (e) => {
-    let message = e.data
-    console.log(
-        JSON.parse(message)
-    )
+ws.addEventListener('message', async (e) => {
+    let data = JSON.parse(e.data)
+    addMessageToChat(data)
 })
+
+function addMessageToChat(data) {
+    let li = document.createElement('li')   
+    li.innerHTML = `<b>${data.username}</b>#${data.id} ${data.text}`;
+    list.append(li)
+
+    /**
+     * Checking whether to scroll the page, 
+     * functions from ./scrolling.js
+     */
+    import('./scrolling').then( ({shouldScroll, scrollToBottom}) => {
+        if( !shouldScroll() ) {
+            scrollToBottom()
+        }
+    })
+}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    console.log(m.value) 
     import('./sendMessages').then( async ({sendMessageToServer, getUser}) => {
         let messageObj = await setMessageObj(getUser());
         sendMessageToServer(messageObj, ws)

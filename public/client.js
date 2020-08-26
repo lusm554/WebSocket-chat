@@ -12,13 +12,6 @@ window.addEventListener('load', () => {
     submit.disabled = false
 })
 
-// function getUser() {  
-//     const USER = JSON.parse(
-//         localStorage.getItem('user')
-//     )
-//     return USER;
-// }
-
 function logoutUser() {
     /**
      * Clear all data from local storage

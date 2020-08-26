@@ -3,3 +3,4 @@ default.json
 REST_SCHEMA.drawio
 test.http
 build/
+.env

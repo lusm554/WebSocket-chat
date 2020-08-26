@@ -6,11 +6,10 @@ const config = require('config')
 const { saveMessage, getPreviousMsgs } = require('./controllers/messageController')
 const PORT = config.get('port')
 
-/* TEST */
 /**
  * Wrapper that will emit files processed by webpack to a server.
  */
-process.env.NODE_ENV = 'development' // development
+require('dotenv').config()
 if(process.env.NODE_ENV !== 'production') {
     const webpack = require('webpack')
     const webpackDevMiddleware = require('webpack-dev-middleware')

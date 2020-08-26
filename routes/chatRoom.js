@@ -53,7 +53,7 @@ Router.post('/join', async (req, res) => {
         return res.status(401).send('Unauthorized')
     }
     else if ( alreadyHaveUser(user_id, room) ) {
-        return res.status(400).send('BAD REQUEST')
+        return res.json( room )
     }
 
     room.users.push(user_id) 

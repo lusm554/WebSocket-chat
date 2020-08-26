@@ -10,6 +10,12 @@ function sendMessageToServer(msg, ws) {
     m.value = ''
 }
 
+function setUserDataOnServer(ws) {
+    if(!localStorage.user) return;
+    let { _id: id, username } = JSON.parse( localStorage.user )
+    let data = JSON.stringify({ type: 'setUserData', id, username })
+    ws.send(data)
+}
 
 function getUser() {  
     const USER = JSON.parse(
@@ -18,4 +24,4 @@ function getUser() {
     return USER;
 }
 
-export { sendMessageToServer, getUser }
+export { sendMessageToServer, getUser, setUserDataOnServer }

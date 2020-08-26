@@ -56,11 +56,16 @@ wss.on('connection', async function connection(ws, req) {
              * After downloading the client, the client sends the user's data to the server,
              * the server sets the data and sends the previous messages to the client
              */
-            ws.user = rawMessage
+            let { id, username } = rawMessage
+            ws.user = { id, username }
             return await sendPreviousMessages(ws)
         }
+        else if(rawMessage.type === 'setRoomUserData') {
+            let { id, username } = rawMessage
+            return ws.user = { id, username }
+        }
         else if(rawMessage.type === 'roomMessage') {
-            return ws.send(message)
+            return await sendMessagesToRoom(ws, rawMessage)
         }
         
         message = JSON.stringify( { type: 'message', ...rawMessage } )
@@ -82,6 +87,22 @@ function sendMessages(ws, message) {
     wss.clients.forEach(client => {
         client.send(message);
     })
+}
+
+async function sendMessagesToRoom(ws, rawMessage) {
+    let { users: roomUsers } = rawMessage.roomObj 
+    let currentUserId = ws.user.id
+
+    wss.clients.forEach(client => {
+        let { id: user_id } = client.user
+        if( roomUsers.includes(user_id) && user_id !== currentUserId ) {
+            client.send(
+                JSON.stringify(rawMessage)
+            )
+        }
+    })
+
+    ws.send(JSON.stringify(rawMessage))
 }
 
 async function sendPreviousMessages(ws) {

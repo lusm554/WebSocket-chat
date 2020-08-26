@@ -60,7 +60,7 @@ ws.addEventListener('open', (e) => {
     console.log('connection open')
     // send user data to the server
     import('./sendMessages').then( ({setUserDataOnServer}) => {
-        setUserDataOnServer(ws)
+        setUserDataOnServer(ws, 'setUserData')
     })
 })
 

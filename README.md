@@ -15,7 +15,7 @@ npm install
 ```
 than
 ```bash 
-npm npm run build & npm run server
+npm run start
 ```
 
 ## Contributing

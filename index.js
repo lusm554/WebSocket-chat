@@ -10,7 +10,7 @@ const PORT = config.get('port')
 /**
  * Wrapper that will emit files processed by webpack to a server.
  */
-process.env.NODE_ENV = 'development'
+process.env.NODE_ENV = 'development' // development
 if(process.env.NODE_ENV !== 'production') {
     const webpack = require('webpack')
     const webpackDevMiddleware = require('webpack-dev-middleware')
@@ -58,6 +58,9 @@ wss.on('connection', async function connection(ws, req) {
              */
             ws.user = rawMessage
             return await sendPreviousMessages(ws)
+        }
+        else if(rawMessage.type === 'roomMessage') {
+            return ws.send(message)
         }
         
         message = JSON.stringify( { type: 'message', ...rawMessage } )

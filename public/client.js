@@ -12,12 +12,12 @@ window.addEventListener('load', () => {
     submit.disabled = false
 })
 
-function getUser() {  
-    const USER = JSON.parse(
-        localStorage.getItem('user')
-    )
-    return USER;
-}
+// function getUser() {  
+//     const USER = JSON.parse(
+//         localStorage.getItem('user')
+//     )
+//     return USER;
+// }
 
 function logoutUser() {
     /**
@@ -35,8 +35,7 @@ function setMessageObj(user) {
     let msg = {
         text: m.value,
         id,
-        username,
-        date: Date.now()
+        username
     }
     return msg
 }
@@ -96,7 +95,7 @@ ws.addEventListener('error', (e) => {
 form.addEventListener('submit', (e) => {
     e.preventDefault()
     // send message obj to the server
-    import('./sendMessages').then( ({sendMessageToServer}) => {
+    import('./sendMessages').then( ({sendMessageToServer, getUser}) => {
         let messageObj = setMessageObj(getUser())
         sendMessageToServer(messageObj, ws)
     }) 

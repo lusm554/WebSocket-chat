@@ -5,13 +5,13 @@
   "main": "index.js",
   "scripts": {
     "server": "nodemon index.js",
-    "dev-server": "webpack-dev-server --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js"
   },
   "keywords": [
     "nodejs",
     "websocket",
-    "chat"
+    "chat",
+    "webpack"
   ],
   "author": "loveyousomuch554@gmail.com",
   "license": "ISC",

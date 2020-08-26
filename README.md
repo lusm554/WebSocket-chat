@@ -1,3 +1,25 @@
-<h1>Chat on WebSocket</h1>
+# Chat on WebSocket
 
-<h2>...</h2>
+Chat on WebSocket is a chat built on websockets and rest API
+
+## Installation
+
+```bash
+git clone https://github.com/loveyousomuch554/WebSocket-chat.git
+```
+
+## Usage
+
+```bash
+npm install
+```
+than
+```bash 
+npm npm run build & npm run server
+```
+
+## Contributing
+Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
+
+## License
+[MIT](https://choosealicense.com/licenses/mit/)

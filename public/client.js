@@ -48,14 +48,6 @@ function setUserDataOnServer() {
     ws.send(data)
 }
 
-// send message obj to the server
-function sendMessageToServer(msg) {
-    let jsonMsg = JSON.stringify(msg)
-    ws.send(jsonMsg)
-
-    m.value = ''
-}
-
 function addMessageToChat(data) {
     let li = document.createElement('li')   
     li.innerHTML = `<b>${data.username}</b>#${data.id} ${data.text}`;
@@ -65,9 +57,7 @@ function addMessageToChat(data) {
      * Checking whether to scroll the page, 
      * functions from ./scrolling.js
      */
-    import('./scrolling').then(module => {
-        const {shouldScroll, scrollToBottom} = module
-
+    import('./scrolling').then( ({shouldScroll, scrollToBottom}) => {
         if( !shouldScroll() ) {
             scrollToBottom()
         }
@@ -105,19 +95,21 @@ ws.addEventListener('error', (e) => {
 
 form.addEventListener('submit', (e) => {
     e.preventDefault()
-    sendMessageToServer( setMessageObj( getUser() ) )
+    // send message obj to the server
+    import('./sendMessages').then( ({sendMessageToServer}) => {
+        let messageObj = setMessageObj(getUser())
+        sendMessageToServer(messageObj, ws)
+    }) 
 });
 
 create_group.addEventListener('click', () => {
-    import('./groupsHandler').then(module => {
-        const { createRoomHandler } = module
+    import('./groupsHandler').then( ({createRoomHandler}) => {
         createRoomHandler()
     })
 })
 
 join_group.addEventListener('click', () => {
-    import('./groupsHandler').then(module => {
-        const { joinToGroup } = module
+    import('./groupsHandler').then( ({joinToGroup}) => {
         joinToGroup()
     })
 })

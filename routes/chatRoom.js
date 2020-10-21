@@ -46,8 +46,10 @@ Router.post('/', async (req, res) => {
 })
 
 Router.post('/join', async (req, res) => {
-    let { user_id, room_id } = req.body
-    let room = ( await roomModel.find({ room_id }))[0]
+    let { user_id, room_id: roomName } = req.body
+    // console.log(user_id, room_id)
+
+    let room = ( await roomModel.find({ roomName }))[0]
 
     if(room === undefined) {
         return res.status(401).send('Unauthorized')
